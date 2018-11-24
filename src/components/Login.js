@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { auth, firebase } from "../../firebase/index";
+import { auth, firebase } from "../firebaseConfig";
 import { Container, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
