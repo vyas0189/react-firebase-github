@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Heading from "./Heading";
 import SearchBar from "./SearchBar";
-import { auth } from "../firebaseConfig";
+import { auth } from "../firebase/firebaseConfig";
 
 class User extends Component {
   state = {

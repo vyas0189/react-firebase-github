@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { auth } from "../firebaseConfig";
+import { auth } from "../firebase/firebaseConfig";
 import {
   Button,
   Container,
