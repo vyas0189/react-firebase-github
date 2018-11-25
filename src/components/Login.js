@@ -4,34 +4,27 @@ import { Container, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 class Login extends Component {
-  state = {
-    isSignedIn: false,
-    user: {}
-  };
-
   componentDidMount() {
+    this.mounted = true;
     auth.onAuthStateChanged(user => {
-      if (user) {
-        this.props.history.push("/user");
+      if (this.mounted) {
+        if (user) {
+          this.props.history.push("/user");
+        }
       }
     });
   }
+  componentWillUnmount() {
+    this.mounted = false;
+  }
   handleLogin = e => {
-    const provider = new firebase.auth.GithubAuthProvider();
     e.preventDefault();
-
-    auth
-      .signInWithPopup(provider)
-      .then(result => {
-        this.setState({ user: result.user });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    const provider = new firebase.auth.GithubAuthProvider();
+    auth.signInWithPopup(provider).catch(err => console.log(err));
   };
   render() {
     return (
-      <Container>
+      <Container style={{ width: 230, display: "block", margin: "auto" }}>
         <Link
           to={{
             pathname: "/user"

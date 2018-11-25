@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Heading from "./Heading";
+import DesktopHeading from "./DesktopHeading";
 import SearchBar from "./SearchBar";
 import { auth } from "../firebaseConfig";
+import MobileContainer from "./MobileHeading";
 
 class User extends Component {
   state = {
@@ -23,8 +24,12 @@ class User extends Component {
   render() {
     return (
       <div>
-        <Heading user={auth.currentUser} />
-        <SearchBar handleChange={this.handleChange} getUser={this.getUser} />
+        <DesktopHeading user={auth.currentUser}>
+          <SearchBar handleChange={this.handleChange} getUser={this.getUser} />
+        </DesktopHeading>
+        <MobileContainer user={auth.currentUser}>
+          <SearchBar handleChange={this.handleChange} getUser={this.getUser} />
+        </MobileContainer>
       </div>
     );
   }

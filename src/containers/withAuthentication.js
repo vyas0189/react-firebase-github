@@ -8,15 +8,21 @@ export default WrappedComponent => {
     };
 
     componentDidMount() {
+      this.mounted = true;
+
       auth.onAuthStateChanged(user => {
-        if (user) {
-          this.setState({ providerData: user.providerData });
-        } else {
-          this.props.history.push("/");
+        if (this.mounted) {
+          if (user) {
+            this.setState({ providerData: user.providerData });
+          } else {
+            this.props.history.push("/");
+          }
         }
       });
     }
-
+    componentWillUnmount() {
+      this.mounted = false;
+    }
     render() {
       return this.state.providerData.length > 0 ? (
         <WrappedComponent providerData={this.state.providerData} />
