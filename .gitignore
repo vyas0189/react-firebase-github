@@ -10,7 +10,7 @@
 
 # production
 /build
-.env
+firebaseOAuth.js
 now.json
 # misc
 .DS_Store

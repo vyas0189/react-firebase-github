@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { auth } from "../../firebaseConfig";
+import { auth } from "../firebaseConfig";
 
 export default WrappedComponent => {
   class WithAuthentication extends Component {

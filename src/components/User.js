@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import DesktopHeading from "./DesktopHeading";
 import SearchBar from "./SearchBar";
-import { auth } from "../../firebaseConfig";
+import { auth } from "../firebaseConfig";
 import MobileContainer from "./MobileHeading";
 
 class User extends Component {

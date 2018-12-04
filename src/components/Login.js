@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { auth, firebase } from "../../firebaseConfig";
+import { auth, firebase } from "../firebaseConfig";
 import { Container, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
@@ -24,11 +24,12 @@ class Login extends Component {
   };
   render() {
     return (
-      <Container style={{ width: 230, display: "block", margin: "auto" }}>
+      <Container>
         <Link
           to={{
             pathname: "/user"
           }}
+          style={{ width: 250, display: "block", margin: "auto", padding: 10 }}
         >
           <Button size="big" color="black" onClick={this.handleLogin}>
             <Icon name="github" />
