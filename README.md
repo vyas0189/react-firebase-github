@@ -1,1 +1,1 @@
-# [CLICK HERE FOR PREVIEW.](https://react-github-lkekltvzck.now.sh/)
+# [CLICK HERE FOR PREVIEW.](https://react-github.now.sh)
