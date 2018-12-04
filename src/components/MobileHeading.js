@@ -8,7 +8,7 @@ import {
   Responsive,
   Sidebar
 } from "semantic-ui-react";
-import { auth } from "../firebaseConfig";
+import { auth } from "../../firebaseConfig";
 
 class MobileContainer extends Component {
   state = {};
