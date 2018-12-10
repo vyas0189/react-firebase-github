@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { auth, firebase, db } from "../firebaseConfig";
 import { Container, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 class Login extends Component {
   componentDidMount() {
@@ -15,7 +16,8 @@ class Login extends Component {
               id: user.uid,
               name: user.displayName,
               email: user.email,
-              photo: user.photoURL
+              photo: user.photoURL,
+              loggedInTime: moment().format("MMMM Do YYYY, h:mm:ss a")
             })
             .then(() => {
               this.props.history.push("/user");

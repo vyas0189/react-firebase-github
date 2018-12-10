@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { auth } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import {
   Button,
   Container,
@@ -10,7 +10,7 @@ import {
   Image,
   Responsive
 } from "semantic-ui-react";
-
+import moment from "moment";
 class Heading extends Component {
   state = { fixed: false };
   hideFixedMenu = () => this.setState({ fixed: false });
@@ -33,12 +33,7 @@ class Heading extends Component {
             style={{ minHeight: 100 }}
             vertical
           >
-            <Menu
-              fixed={fixed ? "top" : null}
-              inverted={!fixed}
-              pointing={!fixed}
-              secondary={!fixed}
-            >
+            <Menu inverted={!fixed} pointing={!fixed} secondary={!fixed}>
               <Container>
                 <Menu.Item as="a">
                   <Image
@@ -65,7 +60,20 @@ class Heading extends Component {
                   <Button
                     as="a"
                     inverted={!fixed}
-                    onClick={() => auth.signOut()}
+                    onClick={() => {
+                      db.collection("users")
+                        .doc(`${auth.currentUser.uid}`)
+                        .set(
+                          {
+                            loggedOutTime: moment().format(
+                              "MMMM Do YYYY, h:mm:ss a"
+                            )
+                          },
+                          { merge: true }
+                        )
+                        .then(() => auth.signOut())
+                        .catch(err => err.message);
+                    }}
                     style={{ marginBottom: 10 }}
                   >
                     Logout

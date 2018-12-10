@@ -8,7 +8,8 @@ import {
   Responsive,
   Sidebar
 } from "semantic-ui-react";
-import { auth } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
+import moment from "moment";
 
 class MobileContainer extends Component {
   state = {};
@@ -57,7 +58,22 @@ class MobileContainer extends Component {
               <Button
                 as="a"
                 inverted={!fixed}
-                onClick={() => auth.signOut()}
+                onClick={() => {
+                  console.log(auth.currentUser);
+                  console.log(auth.currentUser);
+                  db.collection("users")
+                    .doc(`${auth.currentUser.uid}`)
+                    .set(
+                      {
+                        loggedOutTime: moment().format(
+                          "MMMM Do YYYY, h:mm:ss a"
+                        )
+                      },
+                      { merge: true }
+                    )
+                    .then(() => auth.signOut())
+                    .catch(err => err.message);
+                }}
                 style={{ marginBottom: 10 }}
               >
                 Logout
