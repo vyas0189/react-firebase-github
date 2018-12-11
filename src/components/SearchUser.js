@@ -1,42 +1,54 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import { Card, Icon, Grid } from "semantic-ui-react";
-import Repo from "./Repo";
-
+const Repo = lazy(() => import("./Repo"));
+const Organizations = lazy(() => import("./Organizations"));
 class SearchUser extends Component {
-  render() {
-    const {
-      avatar_url,
-      name,
-      bio,
-      followers,
-      following
-    } = this.props.userSearch;
+  state = {
+    errMag: null
+  };
 
-    const extra = this.props.userSearch ? (
-      <div>
+  render() {
+    const { followers, following, avatar_url, name, bio } = this.props.userData;
+    const extra = this.props.userData ? (
+      <div style={{ textAlign: "center" }}>
         <Icon name="user" />
         {followers} Followers
-        <span style={{ marginLeft: 20 }} role="img" aria-label="following">
-          👣{following} Following
-        </span>
+        <div>
+          <span role="img" aria-label="following">
+            👣{following} Following
+          </span>
+        </div>
       </div>
     ) : null;
     return (
-      <div>
-        <Grid style={{ marginTop: 50 }}>
-          <Grid.Row>
-            <Grid.Column width={5}>
-              <Card
-                image={avatar_url}
-                header={name}
-                description={bio}
-                extra={extra}
-              />
+      <div style={{ marginTop: 15 }}>
+        <Grid stackable>
+          {Object.keys(this.props.userData).length ? (
+            <Grid.Column width={4}>
+              <Grid.Row>
+                <Card
+                  image={avatar_url}
+                  header={name}
+                  description={bio}
+                  extra={extra}
+                />
+              </Grid.Row>
+              {this.props.orgs.length > 0 ? (
+                <Grid.Row>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Organizations orgs={this.props.orgs} />
+                  </Suspense>
+                </Grid.Row>
+              ) : null}
             </Grid.Column>
-            <Grid.Column width={11}>
-              <Repo />
+          ) : null}
+          {this.props.userRepos.length > 0 ? (
+            <Grid.Column width="12">
+              <Suspense fallback={<div>Loading...</div>}>
+                <Repo userRepos={this.props.userRepos} />
+              </Suspense>
             </Grid.Column>
-          </Grid.Row>
+          ) : null}
         </Grid>
       </div>
     );
