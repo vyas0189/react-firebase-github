@@ -3,20 +3,20 @@ import DesktopHeading from "./DesktopHeading";
 import SearchBar from "./SearchBar";
 import { auth } from "../firebaseConfig";
 import MobileContainer from "./MobileHeading";
-import { Container } from "semantic-ui-react";
+import { Container, Message } from "semantic-ui-react";
 const SearchUser = lazy(() => import("./SearchUser"));
 class User extends Component {
   state = {
+    username: "",
     userData: null,
-    userRepos: [],
     orgs: [],
     errMsg: null
   };
 
-  getUser = (userData, userRepos, orgs, errMsg) => {
+  getUser = (userData, orgs, errMsg, username) => {
     this.setState({
+      username,
       userData,
-      userRepos,
       orgs,
       errMsg
     });
@@ -24,7 +24,9 @@ class User extends Component {
 
   render() {
     const showErrMsg = this.state.errMsg ? (
-      <div>{this.state.errMsg}</div>
+      <Container style={{ marginTop: "1.5em" }}>
+        <Message negative>{this.state.errMsg}</Message>
+      </Container>
     ) : null;
 
     return (
@@ -37,8 +39,8 @@ class User extends Component {
               <Suspense fallback={<div>Loading...</div>}>
                 <SearchUser
                   userData={this.state.userData}
-                  userRepos={this.state.userRepos}
                   orgs={this.state.orgs}
+                  username={this.state.username}
                 />
               </Suspense>
             </Container>
@@ -51,8 +53,8 @@ class User extends Component {
             <Container>
               <SearchUser
                 userData={this.state.userData}
-                userRepos={this.state.userRepos}
                 orgs={this.state.orgs}
+                username={this.state.username}
               />
             </Container>
           ) : null}

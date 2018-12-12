@@ -1,6 +1,6 @@
 import React, { Component, lazy, Suspense } from "react";
 import { Card, Icon, Grid } from "semantic-ui-react";
-const Repo = lazy(() => import("./Repo"));
+const Repo = lazy(() => import("./Repos"));
 const Organizations = lazy(() => import("./Organizations"));
 class SearchUser extends Component {
   state = {
@@ -42,10 +42,10 @@ class SearchUser extends Component {
               ) : null}
             </Grid.Column>
           ) : null}
-          {this.props.userRepos.length > 0 ? (
+          {Object.keys(this.props.userData).length ? (
             <Grid.Column width="12">
               <Suspense fallback={<div>Loading...</div>}>
-                <Repo userRepos={this.props.userRepos} />
+                <Repo username={this.props.username} />
               </Suspense>
             </Grid.Column>
           ) : null}
