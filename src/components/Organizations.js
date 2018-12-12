@@ -5,11 +5,11 @@ class Organizations extends Component {
   render() {
     return (
       <Card style={{ marginTop: "1em" }}>
+        <Header as="h2" attached="top">
+          Organizations
+        </Header>
         {this.props.orgs.map(org => (
           <React.Fragment key={org.id}>
-            <Header as="h2" attached="top">
-              Organizations
-            </Header>
             <Card.Content>
               <Feed>
                 <Feed.Event>
@@ -36,4 +36,3 @@ class Organizations extends Component {
 }
 
 export default Organizations;
- 
