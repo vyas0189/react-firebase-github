@@ -1,0 +1,46 @@
+.containerRepos {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-template-rows: auto;
+  grid-column-gap: 30px;
+  grid-auto-rows: minmax(100px, auto);
+  grid-auto-columns: minmax(100px, auto);
+}
+.ui.card {
+  width: 100% !important;
+}
+.ui.card:first-child {
+  margin: 1em 0 !important;
+}
+.ui.card:last-child {
+  margin-bottom: auto !important;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .containerRepos {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .containerRepos {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-column-gap: 10px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .containerRepos {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-column-gap: 10px;
+    grid-row-gap: 15px;
+  }
+}

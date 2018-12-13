@@ -1,6 +1,7 @@
 import React, { Component, lazy, Suspense } from "react";
-import { Header, Segment, Card } from "semantic-ui-react";
+import { Header, Segment, Loader, Dimmer } from "semantic-ui-react";
 import axios from "axios";
+import "./Repo.css";
 const Repo = lazy(() => import("./Repo"));
 
 class Repos extends Component {
@@ -43,13 +44,19 @@ class Repos extends Component {
           Repositories
         </Header>
         <Segment attached>
-          <Card.Group itemsPerRow={3}>
-            <Suspense fallback={<div>Loading...</div>}>
+          <div className="containerRepos">
+            <Suspense
+              fallback={
+                <Dimmer active inverted style={{ marginTop: "2em" }}>
+                  <Loader inverted content="Loading" />
+                </Dimmer>
+              }
+            >
               {this.state.userRepos.map(repo => (
-                <Repo name={repo.name} key={repo.id} />
+                <Repo repo={repo} key={repo.id} />
               ))}
             </Suspense>
-          </Card.Group>
+          </div>
         </Segment>
       </React.Fragment>
     );

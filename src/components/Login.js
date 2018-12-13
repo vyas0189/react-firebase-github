@@ -32,10 +32,10 @@ class Login extends Component {
   componentWillUnmount() {
     this.mounted = false;
   }
-  handleLogin = e => {
+  handleLogin = async e => {
     e.preventDefault();
     const provider = new firebase.auth.GithubAuthProvider();
-    auth.signInWithPopup(provider).catch(err => console.log(err));
+    await auth.signInWithPopup(provider).catch(err => console.log(err));
   };
   render() {
     return (

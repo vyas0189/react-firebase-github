@@ -3,7 +3,7 @@ import DesktopHeading from "./DesktopHeading";
 import SearchBar from "./SearchBar";
 import { auth } from "../firebaseConfig";
 import MobileContainer from "./MobileHeading";
-import { Container, Message } from "semantic-ui-react";
+import { Container, Message, Loader, Dimmer } from "semantic-ui-react";
 const SearchUser = lazy(() => import("./SearchUser"));
 class User extends Component {
   state = {
@@ -36,7 +36,13 @@ class User extends Component {
           <SearchBar getUser={this.getUser} />
           {this.state.userData ? (
             <Container>
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense
+                fallback={
+                  <Dimmer active inverted>
+                    <Loader inverted content="Loading" />
+                  </Dimmer>
+                }
+              >
                 <SearchUser
                   userData={this.state.userData}
                   orgs={this.state.orgs}
