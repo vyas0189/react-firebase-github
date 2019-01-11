@@ -17,7 +17,7 @@ class Organizations extends Component {
                   <Feed.Content>
                     <Feed.Summary>
                       <a
-                        href={org.html_url}
+                        href={org.url}
                         rel="noopener noreferrer"
                         target="_blank"
                       >
